@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/symbol"
+        android:text="SNAP"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="16sp"
+        />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AskPrice:"
+        android:textSize="16sp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/askPrice"
+        android:text="111.82"
+        android:textSize="16sp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LastScalePrice:"
+        android:textSize="16sp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lastScalePrice"
+        android:text="111.76"
+        android:textSize="16sp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        />
+
+
+
+</LinearLayout>
