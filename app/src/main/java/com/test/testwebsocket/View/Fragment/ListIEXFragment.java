@@ -69,8 +69,10 @@ public class ListIEXFragment extends Fragment implements ListIEXFragmentView {
                 }
             }
         });
-        presenter = new ListIEXFragmentPresenterImpl(this);
-        adapter = new IEXListAdapter();
+        if (savedInstanceState == null) {
+            presenter = new ListIEXFragmentPresenterImpl(this);
+            adapter = new IEXListAdapter();
+        }
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         listIEX.setLayoutManager(llm);
         listIEX.setAdapter(adapter);

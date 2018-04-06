@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             Fragment fragment = new ListIEXFragment();
             ft.replace(R.id.container, fragment);
-            ft.addToBackStack(null);
             ft.commit();
         }
     }
@@ -26,6 +25,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
     }
 }
