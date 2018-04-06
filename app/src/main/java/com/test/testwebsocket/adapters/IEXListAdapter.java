@@ -30,6 +30,7 @@ public class IEXListAdapter extends RecyclerView.Adapter<IEXListAdapter.ViewHold
         for (TopRes data: dataRes) {
             this.dataRes.put(data.getSymbol(), data);
         }
+        notifyDataSetChanged();
     }
 
     public void insertOrUpdate (TopRes res) {
@@ -37,6 +38,7 @@ public class IEXListAdapter extends RecyclerView.Adapter<IEXListAdapter.ViewHold
             dataRes.remove(res.getSymbol());
         }
         dataRes.put(res.getSymbol(), res);
+        notifyDataSetChanged();
     }
 
     @Override

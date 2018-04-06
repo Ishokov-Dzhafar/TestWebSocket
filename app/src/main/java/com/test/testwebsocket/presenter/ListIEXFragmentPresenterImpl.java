@@ -23,10 +23,10 @@ public class ListIEXFragmentPresenterImpl implements ListIEXFragmentPresenter {
     }
 
     @Override
-    public void getTops(ArrayList<String> symbols) {
-        String str = symbols.get(0);
-        for (int i = 1; i < symbols.size(); i++) {
-            str += "," + symbols.get(i);
+    public void getTops(String[] symbols) {
+        String str = symbols[0];
+        for (int i = 1; i < symbols.length; i++) {
+            str += "," + symbols[i];
         }
         interactor.getTops(str);
     }

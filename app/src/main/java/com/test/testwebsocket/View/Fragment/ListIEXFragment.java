@@ -41,6 +41,7 @@ public class ListIEXFragment extends Fragment implements ListIEXFragmentView {
     private ListIEXFragmentPresenter presenter;
     private IEXListAdapter adapter;
     private Socket mSocket;
+    private final String[] sym = {"SNAP", "FB", "AIG+", "AAPL", "MRO"};
     {
         try {
             mSocket = IO.socket("https://ws-api.iextrading.com/1.0/tops");
@@ -50,6 +51,7 @@ public class ListIEXFragment extends Fragment implements ListIEXFragmentView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Nullable
@@ -69,24 +71,21 @@ public class ListIEXFragment extends Fragment implements ListIEXFragmentView {
                 }
             }
         });
-        if (savedInstanceState == null) {
-            presenter = new ListIEXFragmentPresenterImpl(this);
+
+        if (presenter == null) presenter = new ListIEXFragmentPresenterImpl(this);
+        if (adapter == null) {
+            Log.d("Fragment", "adapter == null");
             adapter = new IEXListAdapter();
         }
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         listIEX.setLayoutManager(llm);
         listIEX.setAdapter(adapter);
+        if (savedInstanceState == null) getData();
         return view;
     }
 
     public void getData() {
-        ArrayList<String> symbols = new ArrayList<>();
-        symbols.add("SNAP");
-        symbols.add("FB");
-        symbols.add("AIG+");
-        symbols.add("AAPL");
-        symbols.add("MRO");
-        presenter.getTops(symbols);
+        presenter.getTops(sym);
     }
 
     private Emitter.Listener onMessage = new Emitter.Listener() {
@@ -109,16 +108,13 @@ public class ListIEXFragment extends Fragment implements ListIEXFragmentView {
     @Override
     public void onSuccessGETTops(ArrayList<TopRes> res) {
         adapter.setDataRes(res);
-        adapter.notifyDataSetChanged();
-        final String[] sym = {"SNAP", "FB", "AIG+", "AAPL", "MRO"};
+
         mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                mSocket.emit("subscribe", sym[0]);
-                mSocket.emit("subscribe", sym[1]);
-                mSocket.emit("subscribe", sym[2]);
-                mSocket.emit("subscribe", sym[3]);
-                mSocket.emit("subscribe", sym[4]);
+                for (int i = 0; i < sym.length; i++) {
+                    mSocket.emit("subscribe", sym[i]);
+                }
             }
         }).on(Socket.EVENT_MESSAGE, onMessage);
 
@@ -139,6 +135,6 @@ public class ListIEXFragment extends Fragment implements ListIEXFragmentView {
     @Override
     public void onResume() {
         super.onResume();
-        getData();
+        mSocket.connect();
     }
 }

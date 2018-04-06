@@ -9,6 +9,6 @@ import java.util.ArrayList;
  */
 
 public interface ListIEXFragmentPresenter {
-    void getTops(ArrayList<String> symbols);
+    void getTops(String[] symbols);
     void onSuccessGETTops(ArrayList<TopRes> res);
 }
